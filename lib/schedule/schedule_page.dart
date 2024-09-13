@@ -32,13 +32,13 @@ class SchedulePageState extends State<SchedulePage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 8,
       child: DevScaffold(
         title: "Schedule",
         tabBar: TabBar(
           indicatorSize: TabBarIndicatorSize.label,
           indicatorColor: Tools.multiColors[Random().nextInt(4)],
-          isScrollable: false,
+          isScrollable: true,
           labelStyle: const TextStyle(fontSize: 12),
           tabs: const <Widget>[
             Tab(
@@ -61,11 +61,39 @@ class SchedulePageState extends State<SchedulePage> {
             ),
             Tab(
               icon: Icon(
+                FontAwesomeIcons.cloud,
+                size: 20,
+              ),
+              child: Text("Cloud"),
+            ),
+            Tab(
+              icon: Icon(
                 FontAwesomeIcons.rocket,
                 size: 20,
               ),
               child: Text("Startups"),
-            )
+            ),
+            Tab(
+              icon: Icon(
+                FontAwesomeIcons.handSparkles,
+                size: 20,
+              ),
+              child: Text("AI"),
+            ),
+            Tab(
+              icon: Icon(
+                FontAwesomeIcons.briefcase,
+                size: 20,
+              ),
+              child: Text("Career"),
+            ),
+            Tab(
+              icon: Icon(
+                FontAwesomeIcons.wrench,
+                size: 20,
+              ),
+              child: Text("Workshops"),
+            ),
           ],
         ),
         body: FutureBuilder<List<Group>>(
@@ -97,14 +125,22 @@ class SchedulePageState extends State<SchedulePage> {
                     groups.expand((group) => group.sessions).toList();
                 final speakers = speakersSnapshot.data!;
 
-                var serviceSessions =
+                final serviceSessions =
                     sessions.where((s) => s.isServiceSession).toList();
-                var webSessions =
+                final webSessions =
                     sessions.where((s) => s.room == "Web").toList();
-                var mobileSessions =
+                final mobileSessions =
                     sessions.where((s) => s.room == "Mobile").toList();
-                var startupsSessions =
+                final cloudSessions =
+                    sessions.where((s) => s.room == "Cloud").toList();
+                final startupsSessions =
                     sessions.where((s) => s.room == "Startup").toList();
+                final aiSessions =
+                    sessions.where((s) => s.room == "AI").toList();
+                final careerSessions =
+                    sessions.where((s) => s.room == "Career").toList();
+                final workshopsSessions =
+                    sessions.where((s) => s.room == "Workshops").toList();
 
                 return TabBarView(
                   children: <Widget>[
@@ -124,7 +160,27 @@ class SchedulePageState extends State<SchedulePage> {
                       other: const [],
                     ),
                     SessionList(
+                      allSessions: cloudSessions,
+                      speakers: speakers,
+                      other: const [],
+                    ),
+                    SessionList(
                       allSessions: startupsSessions,
+                      speakers: speakers,
+                      other: const [],
+                    ),
+                    SessionList(
+                      allSessions: aiSessions,
+                      speakers: speakers,
+                      other: const [],
+                    ),
+                    SessionList(
+                      allSessions: careerSessions,
+                      speakers: speakers,
+                      other: const [],
+                    ),
+                    SessionList(
+                      allSessions: workshopsSessions,
                       speakers: speakers,
                       other: const [],
                     ),

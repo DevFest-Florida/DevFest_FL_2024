@@ -7,11 +7,11 @@ import 'package:devfestfl/universal/dev_scaffold.dart';
 import 'package:devfestfl/utils/tools.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:logging/logging.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SpeakersPage extends StatefulWidget {
   static const String routeName = "/speakers";
-
   const SpeakersPage({Key? key}) : super(key: key);
 
   @override
@@ -20,12 +20,13 @@ class SpeakersPage extends StatefulWidget {
 
 class SpeakersPageState extends State<SpeakersPage> {
   late Future<List<Speaker>> _speakersFuture;
+  final _logger = Logger('SpeakersPage');
 
   @override
   void initState() {
     super.initState();
-    _speakersFuture = SessionizeApiService().getSpeakers().then(
-        (data) => data.map<Speaker>((json) => Speaker.fromJson(json)).toList());
+    _speakersFuture = SessionizeApiService().getSpeakers();
+    _logger.info('SpeakersPageState initState');
   }
 
   Widget socialActions(BuildContext context, Speaker speaker) => FittedBox(

@@ -77,8 +77,8 @@ for more information.
 
 #### Current Versions:
 
-* Flutter Version: 3.24.0
-* Dart SDK Version: 3.5.0
+* Flutter Version: 3.24.3
+* Dart SDK Version: 3.5.3
 
 #### Project was original created from the following versions:
 

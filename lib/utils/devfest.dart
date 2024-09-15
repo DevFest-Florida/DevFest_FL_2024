@@ -16,12 +16,12 @@ class Devfest {
   static const String bannerLight = "assets/images/banner_light.png";
   static const String bannerDark = "assets/images/banner_dark.png";
 
-
   //*  Texts
-  static const String welcomeText = "Welcome to GDG DevFest Florida \n🌴🏖️";
+  static const String welcomeText = "Welcome to GDG DevFest Florida \n🌴 🏖️";
   static const String subtitleText = "The most MAGICAL developers conference";
+  static const String descTitle = "About DevFest";
   static const String descText =
-      '''DevFests are community-led, developer events hosted by GDG chapters around the globe focused on community building & learning about Google’s technologies. Each DevFest is inspired by and uniquely tailored to the needs of the developer community and region that hosts it.''';
+      '''DevFest is a global tech conference series organized by GDGs. Celebrating its 15th year in 2024, DevFest offers opportunities to learn about Google's developer tools and connect with local tech professionals. DevFest Florida, a prominent part of this series since 2017, provides a platform to explore advanced technologies like AI, mobile development, and cloud computing.''';
 
   static const String loadingText = "Loading...";
   static const String tryAgainText = "Try Again";

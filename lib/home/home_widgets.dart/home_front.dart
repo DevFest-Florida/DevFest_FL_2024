@@ -40,11 +40,23 @@ class HomeFront extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        Text(
-          Devfest.descText,
-          style: Theme.of(context).textTheme.bodySmall,
-          textAlign: TextAlign.center,
-        ),
+        ExpansionTile(
+          title: Text(
+            Devfest.descTitle,
+            style: Theme.of(context).textTheme.titleSmall,
+            textAlign: TextAlign.center,
+          ),
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: Text(
+                Devfest.descText,
+                style: Theme.of(context).textTheme.bodySmall,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        )
       ];
 
   Widget socialActions(context) => FittedBox(
@@ -124,14 +136,14 @@ class HomeFront extends StatelessWidget {
             onPressed: () => Navigator.pushNamed(context, TeamPage.routeName),
           ),
           ActionCard(
-            icon: Icons.handshake,
+            icon: Icons.attach_money,
             color: Colors.purple,
             title: Devfest.sponsorText,
             onPressed: () =>
                 Navigator.pushNamed(context, SponsorPage.routeName),
           ),
           ActionCard(
-            icon: Icons.article,
+            icon: Icons.question_answer,
             color: Colors.brown,
             title: Devfest.faqText,
             onPressed: () => Navigator.pushNamed(context, FaqPage.routeName),
@@ -175,7 +187,8 @@ class HomeFront extends StatelessWidget {
             ),
             Text(
               Devfest.appVersion,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 10),
+              style:
+                  Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 10),
             )
           ],
         ),
@@ -190,7 +203,12 @@ class ActionCard extends StatelessWidget {
   final String title;
   final Color color;
 
-  const ActionCard({Key? key, required this.onPressed, required this.icon, required this.title, required this.color})
+  const ActionCard(
+      {Key? key,
+      required this.onPressed,
+      required this.icon,
+      required this.title,
+      required this.color})
       : super(key: key);
   @override
   Widget build(BuildContext context) {

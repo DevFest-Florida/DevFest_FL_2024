@@ -56,8 +56,8 @@ class FaqPageState extends State<FaqPage> {
                             if (context.mounted) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                  content: Text("No back history item"),
-                                  duration: Duration(seconds: 1),
+                                  content: Text("Back button says: I got nada!"),
+                                  duration: Duration(seconds: 3),
                                 ),
                               );
                             }

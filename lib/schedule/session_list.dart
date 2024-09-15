@@ -20,6 +20,13 @@ class SessionList extends StatelessWidget {
     required this.other,
   }) : super(key: key);
 
+  String _formatTime(String dateTimeString) {
+    final dateTime = DateTime.parse(dateTimeString);
+    final hour = dateTime.hour > 12 ? dateTime.hour - 12 : dateTime.hour;
+    final amPm = dateTime.hour >= 12 ? 'PM' : 'AM';
+    return "${hour == 0 ? 12 : hour}:${dateTime.minute.toString().padLeft(2, '0')} $amPm";
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -76,7 +83,7 @@ class SessionList extends StatelessWidget {
             trailing: RichText(
               textAlign: TextAlign.center,
               text: TextSpan(
-                text: "${allSessions[index].startsAt}\n",
+                text: "${_formatTime(allSessions[index].startsAt)}\n",
                 style: Theme.of(context)
                     .textTheme
                     .titleLarge
@@ -96,8 +103,10 @@ class SessionList extends StatelessWidget {
               child: CircleAvatar(
                 radius: 30,
                 backgroundColor: Colors.white,
-                backgroundImage:
-                    CachedNetworkImageProvider(speaker.profilePicture),
+                backgroundImage: allSessions[index].isServiceSession
+                    ? const AssetImage('assets/images/DF24-Attendee-badge.png')
+                    : CachedNetworkImageProvider(speaker.profilePicture)
+                        as ImageProvider,
               ),
             ),
             title: RichText(
@@ -125,7 +134,7 @@ class SessionList extends StatelessWidget {
               ),
             ),
             subtitle: Text(
-              allSessions[index].description ?? '',
+              allSessions[index].room,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     fontSize: 10,
                   ),

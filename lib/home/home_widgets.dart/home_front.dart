@@ -136,14 +136,14 @@ class HomeFront extends StatelessWidget {
             onPressed: () => Navigator.pushNamed(context, TeamPage.routeName),
           ),
           ActionCard(
-            icon: Icons.attach_money,
+            icon: Icons.handshake,
             color: Colors.purple,
             title: Devfest.sponsorText,
             onPressed: () =>
                 Navigator.pushNamed(context, SponsorPage.routeName),
           ),
           ActionCard(
-            icon: Icons.question_answer,
+            icon: Icons.article,
             color: Colors.brown,
             title: Devfest.faqText,
             onPressed: () => Navigator.pushNamed(context, FaqPage.routeName),

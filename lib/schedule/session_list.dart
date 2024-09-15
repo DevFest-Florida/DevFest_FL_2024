@@ -96,8 +96,10 @@ class SessionList extends StatelessWidget {
               child: CircleAvatar(
                 radius: 30,
                 backgroundColor: Colors.white,
-                backgroundImage:
-                    CachedNetworkImageProvider(speaker.profilePicture),
+                backgroundImage: allSessions[index].isServiceSession
+                    ? const AssetImage('assets/images/DF24-Attendee-badge.png')
+                    : CachedNetworkImageProvider(speaker.profilePicture)
+                        as ImageProvider,
               ),
             ),
             title: RichText(

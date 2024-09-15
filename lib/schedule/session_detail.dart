@@ -22,7 +22,7 @@ class SessionDetail extends StatelessWidget {
       required this.speaker})
       : super(key: key);
 
-  Widget socialActions(BuildContext context,  session, speaker) => FittedBox(
+  Widget socialActions(BuildContext context, session, speaker) => FittedBox(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
@@ -90,8 +90,10 @@ class SessionDetail extends StatelessWidget {
                     radius: 100.0,
                     backgroundColor: Colors.white,
                     backgroundImage: session.isServiceSession
-          ? const AssetImage('assets/images/DF24-Attendee-badge.png')
-          : CachedNetworkImageProvider(speaker.profilePicture) as ImageProvider,
+                        ? const AssetImage(
+                            'assets/images/DF24-Attendee-badge.png')
+                        : CachedNetworkImageProvider(speaker.profilePicture)
+                            as ImageProvider,
                   ),
                 ),
               ),

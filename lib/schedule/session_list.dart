@@ -20,6 +20,13 @@ class SessionList extends StatelessWidget {
     required this.other,
   }) : super(key: key);
 
+  String _formatTime(String dateTimeString) {
+    final dateTime = DateTime.parse(dateTimeString);
+    final hour = dateTime.hour > 12 ? dateTime.hour - 12 : dateTime.hour;
+    final amPm = dateTime.hour >= 12 ? 'PM' : 'AM';
+    return "${hour == 0 ? 12 : hour}:${dateTime.minute.toString().padLeft(2, '0')} $amPm";
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -76,7 +83,7 @@ class SessionList extends StatelessWidget {
             trailing: RichText(
               textAlign: TextAlign.center,
               text: TextSpan(
-                text: "${allSessions[index].startsAt}\n",
+                text: "${_formatTime(allSessions[index].startsAt)}\n",
                 style: Theme.of(context)
                     .textTheme
                     .titleLarge

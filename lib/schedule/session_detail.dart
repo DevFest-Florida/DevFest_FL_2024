@@ -22,57 +22,57 @@ class SessionDetail extends StatelessWidget {
       required this.speaker})
       : super(key: key);
 
-  Widget socialActions(BuildContext context, session, speaker) => FittedBox(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            IconButton(
-              icon: const Icon(
-                FontAwesomeIcons.facebookF,
-                size: 15,
-              ),
-              onPressed: () {
-                launchUrl(Uri.parse(speaker.links
-                    .firstWhere((link) => link.linkType == 'Facebook')
-                    .url));
-              },
-            ),
-            IconButton(
-              icon: const Icon(
-                FontAwesomeIcons.twitter,
-                size: 15,
-              ),
-              onPressed: () {
-                launchUrl(Uri.parse(speaker.links
-                    .firstWhere((link) => link.linkType == 'Twitter')
-                    .url));
-              },
-            ),
-            IconButton(
-              icon: const Icon(
-                FontAwesomeIcons.linkedinIn,
-                size: 15,
-              ),
-              onPressed: () {
-                launchUrl(Uri.parse(speaker.links
-                    .firstWhere((link) => link.linkType == 'LinkedIn')
-                    .url));
-              },
-            ),
-            IconButton(
-              icon: const Icon(
-                FontAwesomeIcons.github,
-                size: 15,
-              ),
-              onPressed: () {
-                launchUrl(Uri.parse(speaker.links
-                    .firstWhere((link) => link.linkType == 'GitHub')
-                    .url));
-              },
-            ),
-          ],
-        ),
+  Widget socialActions(BuildContext context, Speaker speaker) {
+    final filteredLinks =
+        speaker.links.where((link) => link.url.isNotEmpty).toList();
+
+    if (filteredLinks.isEmpty) {
+      // Fallback: If no social links, display button to website
+      return IconButton(
+        icon: const Icon(FontAwesomeIcons.globe, size: 15),
+        onPressed: () {
+          launchUrl(Uri.parse('https://devfestflorida.com'));
+        },
       );
+    }
+
+    // If social links exist, show buttons for each link
+    return FittedBox(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          for (var link in filteredLinks)
+            IconButton(
+              icon: Icon(_getIconForLinkType(link.linkType), size: 15),
+              onPressed: () {
+                launchUrl(Uri.parse(link.url));
+              },
+            ),
+        ],
+      ),
+    );
+  }
+
+  IconData _getIconForLinkType(String linkType) {
+    switch (linkType) {
+      case 'Twitter':
+        return FontAwesomeIcons.twitter;
+      case 'LinkedIn':
+        return FontAwesomeIcons.linkedinIn;
+      case 'GitHub':
+        return FontAwesomeIcons.github;
+      case 'Facebook':
+        return FontAwesomeIcons.facebook;
+      case 'Instagram':
+        return FontAwesomeIcons.instagram;
+      case 'Blog':
+        return FontAwesomeIcons.blog;
+      case 'Company_Website':
+        return FontAwesomeIcons.link;
+      default:
+        return FontAwesomeIcons.link;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -123,18 +123,7 @@ class SessionDetail extends StatelessWidget {
                 height: 5,
               ),
               Text(
-                "Content Level: session.contentLevel",
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      fontSize: 13,
-                      fontStyle: FontStyle.italic,
-                    ),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Text(
-                "Location: ${speaker.fullName}",
+                "Location: ${session.room}",
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       fontSize: 13,
@@ -143,25 +132,49 @@ class SessionDetail extends StatelessWidget {
                     ),
               ),
               const SizedBox(
+                height: 5,
+              ),
+              RichText(
+                text: TextSpan(
+                  text: "Session Description: ",
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    fontSize: 13,
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: session.description ?? 'Social Activity',
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        fontSize: 13,
+                        fontStyle: FontStyle.normal,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
                 height: 10,
               ),
               Text(
-                speaker.fullName,
+                speaker.firstName.isNotEmpty
+                    ? "Engage with ${speaker.firstName} on social media 👇"
+                    : "Engage with DevFest on social media 👇",
                 textAlign: TextAlign.left,
                 style: Theme.of(context)
                     .textTheme
                     .bodySmall
-                    ?.copyWith(fontSize: 13),
+                    ?.copyWith(fontSize: 13, fontStyle: FontStyle.italic),
               ),
               const SizedBox(
                 height: 20,
               ),
-              socialActions(context, session, speaker),
+              socialActions(context, speaker),
             ],
           ),
         ),
       ),
-      title: speaker.fullName,
+      title: session.title,
     );
   }
 }

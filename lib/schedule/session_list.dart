@@ -134,7 +134,7 @@ class SessionList extends StatelessWidget {
               ),
             ),
             subtitle: Text(
-              allSessions[index].description ?? '',
+              allSessions[index].room,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     fontSize: 10,
                   ),

@@ -14,7 +14,7 @@ class SponsorsData {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['sponsors'] = sponsors.map((v) => v.toJson()).toList();
-      return data;
+    return data;
   }
 }
 
@@ -48,82 +48,48 @@ class Sponsor {
 
 List<Sponsor> sponsors = [
   Sponsor(
-    name: "Google Developer Groups",
-    image:
-        "https://developers.google.com/community/gdg/images/logo-lockup-gdg-horizontal.png",
-    desc: "Platinum Sponsor",
-    url: 'https://developers.google.com/community/gdg/',
+    name: "Google",
+    image: "assets/images/sponsors/Google_2015_logo.png",
+    desc: "Partner Sponsor",
+    url: 'https://developers.google.com/',
   ),
   Sponsor(
-    name: "Neoware Studios",
-    image: "https://devfestflorida.org/images/logos/STUDIOSLOGO_WITHTM.png",
-    desc: "Platinum Sponsor",
-    url: 'https://www.neowarestudios.com/',
+    name: "Seminole State College",
+    image: "assets/images/sponsors/logo-seminole-state.png",
+    desc: "Partner Sponsor",
+    url: 'https://www.seminolestate.edu/',
   ),
   Sponsor(
-    name: "Capgemini",
-    image:
-        "https://www.capgemini.com/wp-content/uploads/2017/10/capgemini_logo_hi-resolution.jpg?w=300",
-    desc: "Silver Sponsor",
-    url: 'https://www.capgemini.com/',
+    name: "BOT",
+    image: "assets/images/sponsors/bot_male_master_logo.jpg",
+    desc: "Gold Sponsor",
+    url: 'https://blackorlandotech.org/',
   ),
-  Sponsor(
-    name: "TEKsystems",
-    image:
-        "https://www.premiertalentpartners.com/wp-content/uploads/2018/11/teksystems-logo.jpg",
-    desc: "Silver Sponsor",
-    url: 'https://www.teksystems.com/',
-  ),
-  Sponsor(
-    name: "Women Techmakers",
-    image:
-        "https://media.licdn.com/dms/image/C510BAQETwAo-7dXL0A/company-logo_400_400/0?e=1580342400&v=beta&t=3IWqGcAajpul9FA8fozX6PTBQcRJra9TAWutiuSFWow",
-    desc: "Copper Sponsor",
-    url: 'https://www.womentechmakers.com/',
-  ),
-  Sponsor(
+  // Sponsor(
+  //   name: "TEKsystems",
+  //   image:
+  //       "https://www.premiertalentpartners.com/wp-content/uploads/2018/11/teksystems-logo.jpg",
+  //   desc: "Silver Sponsor",
+  //   url: 'https://www.teksystems.com/',
+  // ),
+    Sponsor(
     name: "DataPsy",
-    image: "https://devfestflorida.org/images/logos/datapsy.png",
+    image: "assets/images/sponsors/DataPsy_Logo.jpg",
     desc: "Copper Sponsor",
     url: 'http://www.datapsy.com/',
   ),
   Sponsor(
-    name: "Atlantic.Net",
-    image: "https://devfestflorida.org/images/logos/atlantic-net.png",
-    desc: "Copper Sponsor",
-    url: 'https://www.atlantic.net/',
+    name: "Kodeco",
+    image: "assets/images/sponsors/kodeco.png",
+    desc: "Supporter Sponsor",
+    url: 'https://www.kodeco.com/',
   ),
-  Sponsor(
-    name: "Flutter Developers Group",
-    image: "https://devfestflorida.org/images/logos/flutterdevs.jpg",
-    desc: "Community Partner",
-    url: 'https://www.meetup.com/flutterdevs/',
-  ),
-  Sponsor(
-    name: "Thunder Nerds",
-    image:
-        "http://thundernerdshoo.com/wp-content/uploads/2016/05/thunder-nerds-rule.png",
-    desc: "Community Partner",
-    url: 'https://www.thundernerds.io/',
-  ),
-  Sponsor(
-    name: "Google Developers",
-    image:
-        "https://www.dicoding.com/blog/wp-content/uploads/2018/11/Google-Developer-Challenge.png",
-    desc: "Community Partner",
-    url: 'https://developers.google.com/',
-  ),
-  Sponsor(
-    name: "Orlando Devs",
-    image: "https://devfestflorida.org/images/logos/odevs.png",
-    desc: "Community Partner",
-    url: 'https://orlandodevs.com/',
-  ),
+
   Sponsor(
     name: "JetBrains",
     image:
-        "https://pbs.twimg.com/profile_images/675318355075682304/U5Dp5_C2_400x400.png",
-    desc: "Community Partner",
-    url: 'https://www.jetbrains.com/',
+        "assets/images/sponsors/jetbrains.png",
+    desc: "Supporter Partner",
+    url: 'https://www.jetbrains.com//',
   ),
 ];

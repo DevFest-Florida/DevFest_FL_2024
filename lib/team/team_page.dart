@@ -23,36 +23,88 @@ class TeamPageState extends State<TeamPage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            IconButton(
-              icon: const Icon(
-                FontAwesomeIcons.twitter,
-                size: 15,
+            if (team.twitterUrl.isNotEmpty)
+              IconButton(
+                icon: const Icon(
+                  FontAwesomeIcons.twitter,
+                  size: 15,
+                ),
+                onPressed: () {
+                  launchUrl(Uri.parse(team.twitterUrl));
+                },
               ),
-              onPressed: () {
-                launchUrl(Uri.parse(team.twitterUrl));
-              },
-            ),
-            IconButton(
-              icon: const Icon(
-                FontAwesomeIcons.linkedinIn,
-                size: 15,
+            if (team.linkedinUrl.isNotEmpty)
+              IconButton(
+                icon: Icon(
+                  _getIconForLinkType('LinkedIn'),
+                  size: 15,
+                ),
+                onPressed: () {
+                  launchUrl(Uri.parse(team.linkedinUrl));
+                },
               ),
-              onPressed: () {
-                launchUrl(Uri.parse(team.linkedinUrl));
-              },
-            ),
-            IconButton(
-              icon: const Icon(
-                FontAwesomeIcons.github,
-                size: 15,
+            if (team.facebookUrl.isNotEmpty)
+              IconButton(
+                icon: Icon(
+                  _getIconForLinkType('Facebook'),
+                  size: 15,
+                ),
+                onPressed: () {
+                  launchUrl(Uri.parse(team.facebookUrl));
+                },
               ),
-              onPressed: () {
-                launchUrl(Uri.parse(team.githubUrl));
-              },
-            ),
+            if (team.githubUrl.isNotEmpty)
+              IconButton(
+                icon: Icon(
+                  _getIconForLinkType('GitHub'),
+                  size: 15,
+                ),
+                onPressed: () {
+                  launchUrl(Uri.parse(team.githubUrl));
+                },
+              ),
+            if (team.blogUrl.isNotEmpty)
+              IconButton(
+                icon: Icon(
+                  _getIconForLinkType('Blog'),
+                  size: 15,
+                ),
+                onPressed: () {
+                  launchUrl(Uri.parse(team.blogUrl));
+                },
+              ),
+            if (team.companyUrl.isNotEmpty)
+              IconButton(
+                icon: Icon(
+                  _getIconForLinkType('Company_Website'),
+                  size: 15,
+                ),
+                onPressed: () {
+                  launchUrl(Uri.parse(team.companyUrl));
+                },
+              ),
           ],
         ),
       );
+
+  IconData _getIconForLinkType(String linkType) {
+    switch (linkType) {
+      case 'Twitter':
+        return FontAwesomeIcons.twitter;
+      case 'LinkedIn':
+        return FontAwesomeIcons.linkedinIn;
+      case 'Facebook':
+        return FontAwesomeIcons.facebook;
+      case 'GitHub':
+        return FontAwesomeIcons.github;
+      case 'Blog':
+        return FontAwesomeIcons.blog;
+      case 'Company_Website':
+        return FontAwesomeIcons.link;
+      default:
+        return FontAwesomeIcons.link;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

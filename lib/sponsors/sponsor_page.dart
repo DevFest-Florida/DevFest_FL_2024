@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:devfestfl/home/sponsor.dart';
 import 'package:devfestfl/universal/dev_scaffold.dart';
 import 'package:devfestfl/utils/tools.dart';
@@ -44,15 +43,19 @@ class SponsorPage extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      ConstrainedBox(
-                        constraints: BoxConstraints.expand(
-                          height: MediaQuery.of(context).size.height * 0.3,
-                          width: MediaQuery.of(context).size.width * 0.4,
-                        ),
-                        child: CachedNetworkImage(
-                          fit: BoxFit.contain,
-                          imageUrl: sponsors[index].image,
-                          //placeholder: (context, url) => CircularProgressIndicator(),
+                      Hero(
+                        tag: sponsors[index].name,
+                        child: Container(
+                          constraints: BoxConstraints.expand(
+                            height: MediaQuery.of(context).size.height * 0.2,
+                            width: MediaQuery.of(context).size.width * 0.3,
+                          ),
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage(sponsors[index].image),
+                              fit: BoxFit.contain,
+                            ),
+                          ),
                         ),
                       ),
                       const SizedBox(

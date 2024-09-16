@@ -14,145 +14,122 @@ class TeamsData {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['teams'] = teams.map((v) => v.toJson()).toList();
-      return data;
+    return data;
   }
 }
 
 class Team {
   int id;
   String name;
-  String desc;
-  String job;
+  String role;
+  String bio;
   String image;
-  String speciality;
   String twitterUrl;
   String linkedinUrl;
   String githubUrl;
-  //String contribution;
 
   Team({
     required this.id,
     required this.name,
-    required this.desc,
-    required this.job,
+    required this.role,
+    required this.bio,
     required this.image,
-    required this.speciality,
     required this.twitterUrl,
     required this.linkedinUrl,
     required this.githubUrl,
-    //this.contribution
   });
 
-  Team.fromJson(Map<String, dynamic> json) :
-    id = json['id'] ?? 0,
-    name = json['name'] ?? '',
-    desc = json['desc'] ?? '',
-    job = json['job'] ?? '',
-    image = json['image'] ?? '',
-    speciality = json['speciality'] ?? '',
-    twitterUrl = json['twitter_url'] ?? '',
-    linkedinUrl = json['linkedin_url'] ?? '',
-    githubUrl = json['github_url'] ?? '' {
-    //contribution = json['contribution'];
-  }
+  Team.fromJson(Map<String, dynamic> json)
+      : id = json['id'] ?? 0,
+        name = json['name'] ?? '',
+        role = json['role'] ?? '',
+        bio = json['bio'] ?? '',
+        image = json['image'] ?? '',
+        twitterUrl = json['twitter_url'] ?? '',
+        linkedinUrl = json['linkedin_url'] ?? '',
+        githubUrl = json['github_url'] ?? '';
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
-    data['desc'] = desc;
-    data['job'] = job;
+    data['role'] = role;
+    data['bio'] = bio;
     data['image'] = image;
-    data['speciality'] = speciality;
     data['twitter_url'] = twitterUrl;
     data['linkedin_url'] = linkedinUrl;
     data['github_url'] = githubUrl;
-    //data['contribution'] = this.contribution;
     return data;
   }
 }
 
 List<Team> teams = [
+  // Team(
+  //   id: 1,
+  //   name: "Hendrix Tavarez",
+  //   role: "Lead Organizer",,
+  //   image: "https://devfestflorida.org/images/people/hendrix_tavarez.jpg",
+  //   twitterUrl: "https://twitter.com/htavarez",
+  //   linkedinUrl: "https://www.linkedin.com/in/hendrixtavarez",
+  //   githubUrl: "https://github.com/lockerfish",
+  // ),
   Team(
     id: 1,
-    name: "Hendrix Tavarez",
-    desc: "Lead Organizer",
-    job: "Lead Organizer",
-    speciality: "Organization",
-    //contribution: "Google CEO",
-    image: "https://devfestflorida.org/images/people/hendrix_tavarez.jpg",
-    twitterUrl: "https://twitter.com/htavarez",
-    linkedinUrl: "https://www.linkedin.com/in/hendrixtavarez",
-    githubUrl: "https://github.com/lockerfish",
-  ),
-  Team(
-    id: 2,
     name: "Michael Rosario",
-    desc: "Organizer",
-    job: "Organizer",
-    speciality: "Logistics and travels",
-    //contribution: "Logistics and travels",
-    image: "https://devfestflorida.org/images/people/michael_rosario.jpg",
+    role: "Lead Organizer",
+    bio:
+        "As an experienced software developer with over 19 years of experience, I enjoy helping organizations with agile software development, promoting cultures of innovation, and creative business solutions. I enjoy helping organizations and software teams discover the craft of continuous improvement. I am always looking for opportunities to serve leaders and teams who want to create more value with integrity, character, and predictability. Professional interests: AR/VR, Web dev, MAKERS movement, Agile leadership, Machine learning, Cultures of Innovation, Gaming & Game based learning, Visual analytics",
+    image: "assets/images/team/michael_rosario.jpg",
     twitterUrl: "https://twitter.com/michaelrosario",
     linkedinUrl: "https://www.linkedin.com/in/michaelprosario",
     githubUrl: "https://github.com/",
   ),
+  // Team(
+  //   id: 3,
+  //   name: "Siva G",
+  //   role: "Organizer",
+  //   image: "https://devfestflorida.org/images/people/siva_g.jpg",
+  //   twitterUrl: "https://twitter.com/devfestfl/",
+  //   linkedinUrl: "https://www.linkedin.com/company/devfestflorida/",
+  //   githubUrl: "https://github.com/",
+  // ),
   Team(
-    id: 3,
-    name: "Siva G",
-    desc: "Organizer",
-    job: "Organizer",
-    speciality: "Founder",
-    //contribution: "Founder",
-    image: "https://devfestflorida.org/images/people/siva_g.jpg",
-    twitterUrl: "https://twitter.com/devfestfl/",
-    linkedinUrl: "https://www.linkedin.com/company/devfestflorida/",
-    githubUrl: "https://github.com/",
-  ),
-  Team(
-    id: 4,
+    id: 2,
     name: "Christi Kapp",
-    desc: "Organizer",
-    job: "Organizer",
-    speciality: "Logistics",
-    //contribution: "Logistics",
-    image: "https://devfestflorida.org/images/people/christi_kapp.png",
+    role: "Founder / Organizer",
+    bio:
+        "Christi Kapp is a well-respected Management Consultant and Coach that has spoken at numerous professional conferences on topics ranging from business analysis, to managing organizational change. Christi’s career has included management consulting, executive leadership, coaching and teaching in the hospitality, training and technology industries. She has also managed performance, as well as the professional development of staff engaged in development and delivery of complex information system solutions, solution sales, training, and customer service. Her entrepreneurial background includes founding, growing and selling TechKnowQuest, Inc – one of the Orlando Area's Fastest Growing Tech Companies in 1998 (1992 – 2000). While at TechKnowQuest, she created custom courses for a number of clients and performed management consulting services. She has also performed coaching and consulting services through KnowledgeSpot, Inc, (2000 – 2007) and JustIntegration, Inc. (founded in 2006). She was also co-founder of Art In Motion LLC Custom Motorcycles (founded in 2007), and is Owner/Innkeeper at Kapp and Kappy Bed & Breakfast (2016) She is an accomplished author also. She has written several enterprise information technology books (Prentice-Hall), a UCF Master's thesis on “Regional Readiness for Homeland Security Information Sharing”, and in 2016, wrote a book chapter titled “Soft Factors Enabling Innovation” in the Apple Academic Press series called Ecosystems and Technology: Idea Generation and Content Model Processing. She has a B.S. Degree from the University of Rochester and a M.S. from the College of Health & Public Affairs at the University of Central Florida.",
+    image: "assets/images/team/christi_kapp.png",
     twitterUrl: "https://twitter.com/devfestfl/",
     linkedinUrl: "https://www.linkedin.com/in/artinmotionllc/",
     githubUrl: "https://github.com/",
   ),
+  // Team(
+  //   id: 5,
+  //   name: "Anita Kirkovska",
+  //   role: "Organizer",
+  //   image: "https://devfestflorida.org/images/people/anita_kirkovska.jpg",
+  //   twitterUrl: "https://twitter.com/anitakirkovska",
+  //   linkedinUrl: "https://www.linkedin.com/in/anitakirkovska",
+  //   githubUrl: "https://github.com/",
+  // ),
   Team(
-    id: 5,
-    name: "Anita Kirkovska",
-    desc: "Organizer",
-    job: "Organizer",
-    speciality: "Logistics",
-    //contribution: "Logistics",
-    image: "https://devfestflorida.org/images/people/anita_kirkovska.jpg",
-    twitterUrl: "https://twitter.com/anitakirkovska",
-    linkedinUrl: "https://www.linkedin.com/in/anitakirkovska",
+    id: 3,
+    name: "Kendra Kennedy",
+    role: "Organizer",
+    bio: "Hello everyone! My name is Kendra Kennedy, and I am a Software Engineer who specializes in eXtended Reality (XR) Development and dabbles in Web Development, Mobile Development, and a bit of Machine Learning. I have a deep love for learning and trying out new skills, so when I'm not behind the keyboard I can be often be found taking acting, dancing, or media art classes from the nearby art center or martial arts, yoga, or one-off exercise classes at my local gym. I'm happy to be a part of such an awesome team and look forward to learning and creating with all of you!",
+    image: "assets/images/team/kendra.jpeg",
+    twitterUrl: "https://twitter.com/",
+    linkedinUrl: "https://www.linkedin.com/in//",
     githubUrl: "https://github.com/",
   ),
   Team(
-    id: 6,
-    name: "Marina Trajkovska",
-    desc: "Organizer",
-    job: "Organizer",
-    speciality: "Logistics",
-    //contribution: "Logistics",
-    image: "https://devfestflorida.org/images/people/marina_trajkovska.jpg",
-    twitterUrl: "https://twitter.com/marinatrajk",
-    linkedinUrl: "https://www.linkedin.com/in/marinatrajk/",
-    githubUrl: "https://github.com/",
-  ),
-  Team(
-    id: 7,
-    name: "Javier Carrion",
-    desc: "Organizer",
-    job: "Organizer",
-    speciality: "Social",
-    //contribution: "Social",
-    image: "https://devfestflorida.org/images/people/javier_carrion.jpg",
+    id: 4,
+    name: "Javier 'Javi' Carrion",
+    role: "Organizer",
+    bio:
+        "Hi everyone! My name is Javier, but you can call me \"Javi.\" I live in Ocala, known as  \"the Horse Capital of the World\" and I'm actively involved in the Central Florida Development communities. As a Software Engineer (Web) at Design Interactive, I work with cutting-edge human-system integration (HSI) technologies, which means I get to play with devices like HoloLens and more. Fun Fact: I have a mixology certification from the city of Waterbury! 🍸 I'm excited to be a part of this amazing group and looking forward to connecting with all of you! 🚀",
+    image: "assets/images/team/javi.jpg",
     twitterUrl: "https://twitter.com/seetechnologic",
     linkedinUrl: "https://www.linkedin.com/in/technologic/",
     githubUrl: "https://github.com/JavaVista",

@@ -55,6 +55,7 @@ flutter:
     assets:
         - assets/
         - assets/images/
+        - assets/images/team/
         - assets/maptheme/
 
     # assets:

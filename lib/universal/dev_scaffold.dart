@@ -2,6 +2,7 @@ import 'package:devfestfl/config/index.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DevScaffold extends StatelessWidget {
   final String title;
@@ -25,16 +26,19 @@ class DevScaffold extends StatelessWidget {
             centerTitle: true,
             bottom: tabBar as PreferredSizeWidget?,
             actions: <Widget>[
-              IconButton(
-                icon: Icon(
-                  ConfigBloc().darkModeOn
-                      ? FontAwesomeIcons.lightbulb
-                      : FontAwesomeIcons.solidLightbulb,
-                  size: 20,
-                ),
-                onPressed: () {
-                  ConfigBloc()
-                      .add(DarkModeEvent(!ConfigBloc().darkModeOn));
+              BlocBuilder<ConfigBloc, ConfigState>(
+                builder: (context, state) {
+                  return IconButton(
+                    icon: Icon(
+                      ConfigBloc().darkModeOn
+                          ? FontAwesomeIcons.solidSun
+                          : FontAwesomeIcons.solidMoon,
+                      size: 20,
+                    ),
+                    onPressed: () {
+                      ConfigBloc().add(DarkModeEvent(!ConfigBloc().darkModeOn));
+                    },
+                  );
                 },
               ),
               IconButton(

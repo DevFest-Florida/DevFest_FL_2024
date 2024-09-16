@@ -6,11 +6,13 @@ Experience the magic of DevFest FL the most MAGICAL 🎆 developers conference i
 
 <center>
 
-|              Light/Dark Theme               |               Light/Dark Theme             |             Light/Dark Theme               |               Light/Dark Theme             |
-|   :--------------------------------:  |   :---------------------------------: |   :--------------------------------:  |   :---------------------------------: |
-|   ![](./assets/images/screenshot_1v2.png)  | ![](./assets/images/screenshot_2v2.png) |   ![](./assets/images/screenshot_3v2.png)  |   ![](./assets/images/screenshot_4v2.png) |
+|              Light/Dark Themes               |
+|   :--------------------------------:   |
+|   ![](./assets/images/devfest_app.png)  |
+
 
 </center>
+
 
 ### <p align="center">Conference information 🍊</p>
 
@@ -23,6 +25,8 @@ The event is for the tech community and run by volunteers. Our goal is to raise 
 - Flutter Framework
 - Dart
 - Flutter BloC
+- Google Maps API
+- Sessionize API
 
 #DevFest #DevFestFL
 

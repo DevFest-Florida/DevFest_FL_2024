@@ -18,8 +18,9 @@ class HomeFront extends StatelessWidget {
   const HomeFront({Key? key}) : super(key: key);
 
   _launchURL(String url) async {
-    if (await canLaunchUrl(Uri.parse(url))) {
-      await launchUrl(Uri.parse(url));
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
     } else {
       throw 'Could not launch $url';
     }

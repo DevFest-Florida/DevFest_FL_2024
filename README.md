@@ -23,6 +23,8 @@ The event is for the tech community and run by volunteers. Our goal is to raise 
 - Flutter Framework
 - Dart
 - Flutter BloC
+- Google Maps API
+- Sessionize API
 
 #DevFest #DevFestFL
 

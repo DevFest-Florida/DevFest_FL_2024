@@ -103,8 +103,7 @@ class SessionDetail extends StatelessWidget {
               Text(
                 speaker.tagLine,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontSize: 14,
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: Tools.multiColors[Random().nextInt(4)],
                     ),
               ),
@@ -114,8 +113,7 @@ class SessionDetail extends StatelessWidget {
               Text(
                 speaker.fullName,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontSize: 20,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(        
                       fontWeight: FontWeight.bold,
                     ),
               ),

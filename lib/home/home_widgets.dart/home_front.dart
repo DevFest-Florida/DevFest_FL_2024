@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:devfestfl/config/config_bloc.dart';
 import 'package:devfestfl/faq/faq_page.dart';
 import 'package:devfestfl/map/map_page.dart';
@@ -49,10 +51,24 @@ class HomeFront extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(8),
-              child: Text(
-                Devfest.descText,
-                style: Theme.of(context).textTheme.bodySmall,
-                textAlign: TextAlign.center,
+              child: Column(
+                children: [
+                  Text(
+                    Devfest.descText,
+                    style: Theme.of(context).textTheme.bodySmall,
+                    textAlign: TextAlign.center,
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      await _launchURL(
+                          "https://developers.google.com/community-guidelines");
+                    },
+                    child: Text('Community Guidelines',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: Tools.multiColors[Random().nextInt(4)],
+                            )),
+                  ),
+                ],
               ),
             ),
           ],

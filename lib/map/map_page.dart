@@ -17,7 +17,7 @@ class MapPage extends StatefulWidget {
 
 class MapPageState extends State<MapPage> {
   bool isMapCreated = false;
-  static const LatLng eventLocation = LatLng(28.663151, -81.233940);
+  static const LatLng eventLocation = LatLng(28.75077694222602, -81.30458171285353);
   String? mapStyle;
   String? lightMapStyle;
   String? darkMapStyle;
@@ -28,7 +28,7 @@ class MapPageState extends State<MapPage> {
     loadMapStyles();
   }
 
-  final CameraPosition _neowareStudios = const CameraPosition(
+  final CameraPosition _devFestFlorida = const CameraPosition(
     target: eventLocation,
     zoom: 14,
   );
@@ -49,14 +49,14 @@ class MapPageState extends State<MapPage> {
   Set<Marker> _createMarker() {
     return <Marker>{
       Marker(
-        markerId: const MarkerId("neoware_marker_1"),
+        markerId: const MarkerId("devfest_marker"),
         position: eventLocation,
         icon: BitmapDescriptor.defaultMarkerWithHue(
           BitmapDescriptor.hueOrange,
         ),
         infoWindow: const InfoWindow(
-          title: 'DevFest 2019 🌴🏖️ (Neoware Studios)',
-          snippet: "1485 Oviedo Mall Boulevard, Oviedo, FL 32765",
+          title: 'DevFest 2024 🌴🏖️',
+          snippet: "Seminole State College"
         ),
       ),
     };
@@ -91,7 +91,7 @@ class MapPageState extends State<MapPage> {
               myLocationButtonEnabled: true,
               myLocationEnabled: true,
               markers: _createMarker(),
-              initialCameraPosition: _neowareStudios,
+              initialCameraPosition: _devFestFlorida,
               onMapCreated: (GoogleMapController controller) {
                 isMapCreated = true;
                 changeMapMode();
@@ -107,13 +107,15 @@ class MapPageState extends State<MapPage> {
                 child: RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
-                    text: "Neoware Studios, Oviedo Mall\n",
+                    text: "Seminole State College\n",
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
                     children: [
                       TextSpan(
-                        text: "1485 Oviedo Mall Boulevard, Oviedo, FL 32765",
+                        text: "Wayne M. Densch Partnership Center\n"
+                              "100 Weldon Blvd\n"
+                              "Sanford, FL 32773",
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
                               fontSize: 14,
                               fontWeight: FontWeight.normal,
@@ -131,4 +133,5 @@ class MapPageState extends State<MapPage> {
       title: "Location",
     );
   }
+
 }

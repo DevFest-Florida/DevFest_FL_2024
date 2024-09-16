@@ -21,6 +21,7 @@ class SpeakersPage extends StatefulWidget {
 class SpeakersPageState extends State<SpeakersPage> {
   late Future<List<Speaker>> _speakersFuture;
   final _logger = Logger('SpeakersPage');
+  final List<bool> _isExpanded = [];
 
   @override
   void initState() {
@@ -85,87 +86,116 @@ class SpeakersPageState extends State<SpeakersPage> {
           }
 
           final speakers = snapshot.data!;
+          _isExpanded.clear();
+          _isExpanded.addAll(List.generate(speakers.length, (_) => false));
 
           return ListView.builder(
             shrinkWrap: true,
             itemCount: speakers.length,
             itemBuilder: (BuildContext context, int index) {
               final speaker = speakers[index];
-              return Card(
-                elevation: 0.0,
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      ConstrainedBox(
-                        constraints: BoxConstraints.expand(
-                          height: MediaQuery.of(context).size.height * 0.2,
-                          width: MediaQuery.of(context).size.width * 0.3,
-                        ),
-                        child: Hero(
-                          tag: speaker.id,
-                          child: CircleAvatar(
-                            radius: MediaQuery.of(context).size.width * 0.15,
-                            backgroundColor: Colors.white,
-                            backgroundImage: CachedNetworkImageProvider(
-                                speaker.profilePicture),
+              return StatefulBuilder(
+                builder: (BuildContext context, StateSetter setState) {
+                  return Card(
+                    elevation: 0.0,
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          ConstrainedBox(
+                            constraints: BoxConstraints.expand(
+                              height: MediaQuery.of(context).size.height * 0.2,
+                              width: MediaQuery.of(context).size.width * 0.3,
+                            ),
+                            child: Hero(
+                              tag: speaker.id,
+                              child: CircleAvatar(
+                                radius:
+                                    MediaQuery.of(context).size.width * 0.15,
+                                backgroundColor: Colors.white,
+                                backgroundImage: CachedNetworkImageProvider(
+                                    speaker.profilePicture),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Column(
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          Expanded(
+                            child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    Text(
+                                      speaker.fullName,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge,
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    AnimatedContainer(
+                                      duration: const Duration(seconds: 1),
+                                      width: MediaQuery.of(context).size.width *
+                                          0.3,
+                                      height: 5,
+                                      color: Tools
+                                          .multiColors[Random().nextInt(4)],
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
                                 Text(
-                                  speaker.fullName,
-                                  style: Theme.of(context).textTheme.titleLarge,
+                                  speaker.tagLine,
+                                  style: Theme.of(context).textTheme.titleSmall,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  _isExpanded[index]
+                                      ? speaker.bio
+                                      : "${speaker.bio.substring(0, 120)}...",
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      _isExpanded[index] = !_isExpanded[index];
+                                    });
+                                  },
+                                  child: Text(
+                                    _isExpanded[index] ? "less" : "more",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall
+                                        ?.copyWith(
+                                          color: Tools
+                                              .multiColors[Random().nextInt(4)],
+                                        ),
+                                  ),
                                 ),
                                 const SizedBox(
                                   height: 5,
                                 ),
-                                AnimatedContainer(
-                                  duration: const Duration(seconds: 1),
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.3,
-                                  height: 5,
-                                  color: Tools.multiColors[Random().nextInt(4)],
-                                ),
+                                socialActions(context, speaker),
                               ],
                             ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              speaker.tagLine,
-                              style: Theme.of(context).textTheme.titleSmall,
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              speaker.bio,
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            socialActions(context, speaker),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                },
               );
             },
           );

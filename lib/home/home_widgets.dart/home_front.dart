@@ -33,7 +33,6 @@ class HomeFrontState extends State<HomeFront> {
     });
   }
 
-
   List<Widget> devFestTexts(context) => [
         Text(
           Devfest.welcomeText,
@@ -67,31 +66,6 @@ class HomeFrontState extends State<HomeFront> {
                     style: Theme.of(context).textTheme.bodySmall,
                     textAlign: TextAlign.center,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Community Guidelines',
-                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                              color: Tools.multiColors[Random().nextInt(4)],
-                            ),
-                      ),
-                      IconButton(
-                        icon: const Icon(
-                          FontAwesomeIcons.link,
-                          size: 15,
-                        ),
-                        onPressed: () async {
-                          const url = "https://developers.google.com/community-guidelines";
-                          if (await canLaunchUrl(Uri.parse(url))) {
-                            await launchUrl(Uri.parse(url));
-                          } else {
-                            throw 'Could not launch $url';
-                          }
-                        },
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),
@@ -100,64 +74,67 @@ class HomeFrontState extends State<HomeFront> {
       ];
 
   Widget socialActions(context) => FittedBox(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          IconButton(
-            icon: const Icon(FontAwesomeIcons.facebookF),
-            onPressed: () async {
-              const url = "https://www.facebook.com/devfestflorida/";
-              await launchUrl(Uri.parse(url));
-            },
-          ),
-          IconButton(
-            icon: const Icon(FontAwesomeIcons.twitter),
-            onPressed: () async {
-              const url = "https://twitter.com/devfestfl";
-              await launchUrl(Uri.parse(url));
-            },
-          ),
-          IconButton(
-            icon: const Icon(FontAwesomeIcons.linkedinIn),
-            onPressed: () async {
-              const url = "https://www.linkedin.com/company/devfestflorida/";
-              await launchUrl(Uri.parse(url));
-            },
-          ),
-          IconButton(
-            icon: const Icon(FontAwesomeIcons.youtube),
-            onPressed: () async {
-              const url = "https://www.youtube.com/channel/UCKy_rozojea4PZHCVYHqKwg";
-              await launchUrl(Uri.parse(url));
-            },
-          ),
-          Tooltip(
-            key: _tooltipKey,
-            message: "Register to join us for our upcoming GDG events",
-            waitDuration: const Duration(seconds: 5),
-            decoration: BoxDecoration(
-              color: Tools.multiColors[Random().nextInt(4)],
-              borderRadius: BorderRadius.circular(8),
-            ),
-            textStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-            child: IconButton(
-              icon: const Icon(FontAwesomeIcons.google),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            IconButton(
+              icon: const Icon(FontAwesomeIcons.facebookF),
               onPressed: () async {
-                const url = "https://gdg.community.dev/gdg-central-florida/";
+                const url = "https://www.facebook.com/devfestflorida/";
                 await launchUrl(Uri.parse(url));
               },
             ),
-          ),
-          IconButton(
-            icon: const Icon(FontAwesomeIcons.discord),
-            onPressed: () async {
-              const url = "https://discord.gg/XRY5Qf4QjK";
-              await launchUrl(Uri.parse(url));
-            },
-          ),
-        ],
-      ),
-    );  Widget newActions(context) => Wrap(
+            IconButton(
+              icon: const Icon(FontAwesomeIcons.twitter),
+              onPressed: () async {
+                const url = "https://twitter.com/devfestfl";
+                await launchUrl(Uri.parse(url));
+              },
+            ),
+            IconButton(
+              icon: const Icon(FontAwesomeIcons.linkedinIn),
+              onPressed: () async {
+                const url = "https://www.linkedin.com/company/devfestflorida/";
+                await launchUrl(Uri.parse(url));
+              },
+            ),
+            IconButton(
+              icon: const Icon(FontAwesomeIcons.youtube),
+              onPressed: () async {
+                const url =
+                    "https://www.youtube.com/channel/UCKy_rozojea4PZHCVYHqKwg";
+                await launchUrl(Uri.parse(url));
+              },
+            ),
+            Tooltip(
+              key: _tooltipKey,
+              message: "Register to join us for our upcoming GDG events",
+              waitDuration: const Duration(seconds: 5),
+              decoration: BoxDecoration(
+                color: Tools.multiColors[Random().nextInt(4)],
+                borderRadius: BorderRadius.circular(8),
+              ),
+              textStyle: const TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.bold),
+              child: IconButton(
+                icon: const Icon(FontAwesomeIcons.google),
+                onPressed: () async {
+                  const url = "https://gdg.community.dev/gdg-central-florida/";
+                  await launchUrl(Uri.parse(url));
+                },
+              ),
+            ),
+            IconButton(
+              icon: const Icon(FontAwesomeIcons.discord),
+              onPressed: () async {
+                const url = "https://discord.gg/XRY5Qf4QjK";
+                await launchUrl(Uri.parse(url));
+              },
+            ),
+          ],
+        ),
+      );
+  Widget newActions(context) => Wrap(
         alignment: WrapAlignment.center,
         spacing: 30.0,
         runSpacing: 30.0,
@@ -234,7 +211,8 @@ class HomeFrontState extends State<HomeFront> {
             ),
             GestureDetector(
               onTap: () async {
-                const url = "https://developers.google.com/community-guidelines";
+                const url =
+                    "https://developers.google.com/community-guidelines";
                 if (await canLaunchUrl(Uri.parse(url))) {
                   await launchUrl(Uri.parse(url));
                 } else {

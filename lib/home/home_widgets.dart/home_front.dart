@@ -14,13 +14,29 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class HomeFront extends StatelessWidget {
+class HomeFront extends StatefulWidget {
   const HomeFront({Key? key}) : super(key: key);
 
-  _launchURL(String url) async {
+  @override
+  HomeFrontState createState() => HomeFrontState();
+}
+
+class HomeFrontState extends State<HomeFront> {
+  final GlobalKey<TooltipState> _tooltipKey = GlobalKey<TooltipState>();
+
+  @override
+  void initState() {
+    super.initState();
+    // Show the tooltip when the home page is loaded
+    Future.delayed(const Duration(milliseconds: 5000), () {
+      _tooltipKey.currentState?.ensureTooltipVisible();
+    });
+  }
+
+  Future<void> _launchURL(String url) async {
     final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
+      await launchUrl(uri, mode: LaunchMode.inAppWebView);
     } else {
       throw 'Could not launch $url';
     }
@@ -105,22 +121,28 @@ class HomeFront extends StatelessWidget {
                     "https://www.youtube.com/channel/UCKy_rozojea4PZHCVYHqKwg");
               },
             ),
-            IconButton(
-              icon: const Icon(FontAwesomeIcons.meetup),
-              onPressed: () async {
-                await _launchURL("https://www.meetup.com/GDG-Central-Florida/");
-              },
+            Tooltip(
+              key: _tooltipKey,
+              message: "Register to join us for our upcoming GDG events",
+              waitDuration: const Duration(seconds: 5),
+              decoration: BoxDecoration(
+                color: Tools.multiColors[Random().nextInt(4)],
+                borderRadius: BorderRadius.circular(8),
+              ),
+              textStyle: const TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.bold),
+              child: IconButton(
+                icon: const Icon(FontAwesomeIcons.google),
+                onPressed: () async {
+                  await _launchURL(
+                      "https://gdg.community.dev/gdg-central-florida/");
+                },
+              ),
             ),
             IconButton(
-              icon: const Icon(FontAwesomeIcons.envelope),
+              icon: const Icon(FontAwesomeIcons.discord),
               onPressed: () async {
-                var emailUrl =
-                    '''mailto:suavejavi@gmail.com?subject=I Need Support - DevFest Florida 🌴🏖 App&body=Thanks for reaching out! I'd be more than happy to help you. Please, provide below a description of the issue and your contact information.
-👇👇👇
- \n
- ''';
-                var out = Uri.encodeFull(emailUrl);
-                await _launchURL(out);
+                await _launchURL("https://discord.gg/XRY5Qf4QjK");
               },
             ),
           ],

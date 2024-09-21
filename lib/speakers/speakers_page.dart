@@ -154,10 +154,13 @@ class SpeakersPageState extends State<SpeakersPage> {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                Text(
-                                  speaker.tagLine,
-                                  style: Theme.of(context).textTheme.titleSmall,
-                                ),
+                                Text(speaker.tagLine,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelSmall
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                        )),
                                 const SizedBox(
                                   height: 10,
                                 ),

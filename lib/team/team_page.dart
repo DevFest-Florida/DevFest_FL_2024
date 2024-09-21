@@ -17,7 +17,10 @@ class TeamPage extends StatefulWidget {
 }
 
 class TeamPageState extends State<TeamPage> {
-  final List<bool> _isExpanded = List.generate(teams.length, (_) => false);
+  final List<List<bool>> _isExpanded = List.generate(
+    gdgChapters.length,
+    (i) => List.generate(gdgChapters[i].members.length, (_) => false),
+  );
 
   Widget socialActions(context, Team team) => FittedBox(
         child: Row(
@@ -53,6 +56,16 @@ class TeamPageState extends State<TeamPage> {
                   launchUrl(Uri.parse(team.facebookUrl));
                 },
               ),
+            if (team.discordUrl.isNotEmpty)
+              IconButton(
+                icon: Icon(
+                  _getIconForLinkType('Discord'),
+                  size: 15,
+                ),
+                onPressed: () {
+                  launchUrl(Uri.parse(team.discordUrl));
+                },
+              ),
             if (team.githubUrl.isNotEmpty)
               IconButton(
                 icon: Icon(
@@ -61,6 +74,16 @@ class TeamPageState extends State<TeamPage> {
                 ),
                 onPressed: () {
                   launchUrl(Uri.parse(team.githubUrl));
+                },
+              ),
+            if (team.personalUrl.isNotEmpty)
+              IconButton(
+                icon: Icon(
+                  _getIconForLinkType('Personal_Website'),
+                  size: 15,
+                ),
+                onPressed: () {
+                  launchUrl(Uri.parse(team.personalUrl));
                 },
               ),
             if (team.blogUrl.isNotEmpty)
@@ -95,12 +118,16 @@ class TeamPageState extends State<TeamPage> {
         return FontAwesomeIcons.linkedinIn;
       case 'Facebook':
         return FontAwesomeIcons.facebook;
+      case 'Discord':
+        return FontAwesomeIcons.discord;
       case 'GitHub':
         return FontAwesomeIcons.github;
+      case 'Personal_Website':
+        return FontAwesomeIcons.link;
       case 'Blog':
         return FontAwesomeIcons.blog;
       case 'Company_Website':
-        return FontAwesomeIcons.link;
+        return FontAwesomeIcons.building;
       default:
         return FontAwesomeIcons.link;
     }
@@ -112,98 +139,159 @@ class TeamPageState extends State<TeamPage> {
       title: "Team",
       body: ListView.builder(
         shrinkWrap: true,
-        itemCount: teams.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Card(
-            elevation: 0.0,
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ConstrainedBox(
-                    constraints: BoxConstraints.expand(
-                      height: MediaQuery.of(context).size.height * 0.2,
-                      width: MediaQuery.of(context).size.width * 0.3,
+        itemCount: gdgChapters.length,
+        itemBuilder: (BuildContext context, int chapterIndex) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      gdgChapters[chapterIndex].name,
+                      style: Theme.of(context).textTheme.headlineSmall,
                     ),
-                    child: Hero(
-                      tag: teams[index].id,
-                      child: CircleAvatar(
-                        radius: MediaQuery.of(context).size.width * 0.15,
-                        backgroundColor: Colors.white,
-                        backgroundImage: AssetImage(
-                          teams[index].image,
-                        ),
+                    InkWell(
+                        onTap: () {
+                          launchUrl(
+                              Uri.parse(gdgChapters[chapterIndex].chapterUrl));
+                        },
+                        child: Icon(
+                          FontAwesomeIcons.link,
+                          size: 15,
+                          color: Theme.of(context)
+                              .textTheme
+                              .bodySmall
+                              ?.copyWith(
+                                color: Tools.multiColors[Random().nextInt(4)],
+                              )
+                              .color,
+                        )),
+                  ],
+                ),
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: gdgChapters[chapterIndex].members.length,
+                itemBuilder: (BuildContext context, int memberIndex) {
+                  final team = gdgChapters[chapterIndex].members[memberIndex];
+                  return Card(
+                    elevation: 0.0,
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          ConstrainedBox(
+                            constraints: BoxConstraints.expand(
+                              height: MediaQuery.of(context).size.height * 0.2,
+                              width: MediaQuery.of(context).size.width * 0.3,
+                            ),
+                            child: Hero(
+                              tag: team.id,
+                              child: CircleAvatar(
+                                radius:
+                                    MediaQuery.of(context).size.width * 0.15,
+                                backgroundColor: Colors.white,
+                                backgroundImage: AssetImage(
+                                  team.image,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    Text(
+                                      team.name,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge,
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    AnimatedContainer(
+                                      duration: const Duration(seconds: 1),
+                                      width: MediaQuery.of(context).size.width *
+                                          0.3,
+                                      height: 5,
+                                      color: Tools
+                                          .multiColors[Random().nextInt(4)],
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text("${team.position}, ${team.company}",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelSmall
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                        )),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  team.role,
+                                  style: Theme.of(context).textTheme.titleSmall,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  _isExpanded[chapterIndex][memberIndex]
+                                      ? team.bio
+                                      : "${team.bio.substring(0, 120)}...",
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      _isExpanded[chapterIndex][memberIndex] =
+                                          !_isExpanded[chapterIndex]
+                                              [memberIndex];
+                                    });
+                                  },
+                                  child: Text(
+                                    _isExpanded[chapterIndex][memberIndex]
+                                        ? "less"
+                                        : "more",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall
+                                        ?.copyWith(
+                                          color: Tools
+                                              .multiColors[Random().nextInt(4)],
+                                        ),
+                                  ),
+                                ),
+                                socialActions(context, team),
+                              ],
+                            ),
+                          )
+                        ],
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Text(
-                              teams[index].name,
-                              style: Theme.of(context).textTheme.titleLarge,
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            AnimatedContainer(
-                              duration: const Duration(seconds: 1),
-                              width: MediaQuery.of(context).size.width * 0.3,
-                              height: 5,
-                              color: Tools.multiColors[Random().nextInt(4)],
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          teams[index].role,
-                          style: Theme.of(context).textTheme.titleSmall,
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          _isExpanded[index]
-                              ? teams[index].bio
-                              : "${teams[index].bio.substring(0, 120)}...",
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              _isExpanded[index] = !_isExpanded[index];
-                            });
-                          },
-                          child: Text(
-                            _isExpanded[index] ? "less" : "more",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall
-                                ?.copyWith(
-                                  color: Tools.multiColors[Random().nextInt(4)],
-                                ),
-                          ),
-                        ),
-                        socialActions(context, teams[index]),
-                      ],
-                    ),
-                  )
-                ],
+                  );
+                },
               ),
-            ),
+            ],
           );
         },
       ),

@@ -73,65 +73,74 @@ class HomeFrontState extends State<HomeFront> {
         )
       ];
 
-  Widget socialActions(context) => FittedBox(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            IconButton(
-              icon: const Icon(FontAwesomeIcons.facebookF),
-              onPressed: () async {
-                const url = "https://www.facebook.com/devfestflorida/";
-                await launchUrl(Uri.parse(url));
-              },
+  Widget socialActions(context) => MouseRegion(
+        onEnter: (_) => _tooltipKey.currentState?.ensureTooltipVisible(),
+        onExit: (_) => _tooltipKey.currentState?.deactivate(),
+        child: Tooltip(
+          key: _tooltipKey,
+          message: "Connect with us on social media and join our community!",
+          waitDuration: const Duration(milliseconds: 500),
+          decoration: BoxDecoration(
+            color: Tools.multiColors[Random().nextInt(4)],
+            borderRadius: BorderRadius.circular(8),
+          ),
+          textAlign: TextAlign.center,
+          textStyle: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+          child: FittedBox(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                IconButton(
+                  icon: const Icon(FontAwesomeIcons.facebookF),
+                  onPressed: () async {
+                    const url = "https://www.facebook.com/devfestflorida/";
+                    await launchUrl(Uri.parse(url));
+                  },
+                ),
+                IconButton(
+                  icon: const Icon(FontAwesomeIcons.twitter),
+                  onPressed: () async {
+                    const url = "https://twitter.com/devfestfl";
+                    await launchUrl(Uri.parse(url));
+                  },
+                ),
+                IconButton(
+                  icon: const Icon(FontAwesomeIcons.linkedinIn),
+                  onPressed: () async {
+                    const url =
+                        "https://www.linkedin.com/company/devfestflorida/";
+                    await launchUrl(Uri.parse(url));
+                  },
+                ),
+                IconButton(
+                  icon: const Icon(FontAwesomeIcons.youtube),
+                  onPressed: () async {
+                    const url =
+                        "https://www.youtube.com/channel/UCKy_rozojea4PZHCVYHqKwg";
+                    await launchUrl(Uri.parse(url));
+                  },
+                ),
+                IconButton(
+                  icon: const Icon(FontAwesomeIcons.google),
+                  onPressed: () async {
+                    const url =
+                        "https://gdg.community.dev/gdg-central-florida/";
+                    await launchUrl(Uri.parse(url));
+                  },
+                ),
+                IconButton(
+                  icon: const Icon(FontAwesomeIcons.discord),
+                  onPressed: () async {
+                    const url = "https://discord.gg/XRY5Qf4QjK";
+                    await launchUrl(Uri.parse(url));
+                  },
+                ),
+              ],
             ),
-            IconButton(
-              icon: const Icon(FontAwesomeIcons.twitter),
-              onPressed: () async {
-                const url = "https://twitter.com/devfestfl";
-                await launchUrl(Uri.parse(url));
-              },
-            ),
-            IconButton(
-              icon: const Icon(FontAwesomeIcons.linkedinIn),
-              onPressed: () async {
-                const url = "https://www.linkedin.com/company/devfestflorida/";
-                await launchUrl(Uri.parse(url));
-              },
-            ),
-            IconButton(
-              icon: const Icon(FontAwesomeIcons.youtube),
-              onPressed: () async {
-                const url =
-                    "https://www.youtube.com/channel/UCKy_rozojea4PZHCVYHqKwg";
-                await launchUrl(Uri.parse(url));
-              },
-            ),
-            Tooltip(
-              key: _tooltipKey,
-              message: "Register to join us for our upcoming GDG events",
-              waitDuration: const Duration(seconds: 5),
-              decoration: BoxDecoration(
-                color: Tools.multiColors[Random().nextInt(4)],
-                borderRadius: BorderRadius.circular(8),
-              ),
-              textStyle: const TextStyle(
-                  color: Colors.white, fontWeight: FontWeight.bold),
-              child: IconButton(
-                icon: const Icon(FontAwesomeIcons.google),
-                onPressed: () async {
-                  const url = "https://gdg.community.dev/gdg-central-florida/";
-                  await launchUrl(Uri.parse(url));
-                },
-              ),
-            ),
-            IconButton(
-              icon: const Icon(FontAwesomeIcons.discord),
-              onPressed: () async {
-                const url = "https://discord.gg/XRY5Qf4QjK";
-                await launchUrl(Uri.parse(url));
-              },
-            ),
-          ],
+          ),
         ),
       );
   Widget newActions(context) => Wrap(

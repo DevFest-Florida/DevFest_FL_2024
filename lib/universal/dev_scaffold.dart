@@ -16,7 +16,7 @@ class DevScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 500),
-      color: ConfigBloc().darkModeOn ? Colors.grey[800] : Colors.white,
+      color: Theme.of(context).canvasColor,
       child: SafeArea(
         top: false,
         bottom: false,

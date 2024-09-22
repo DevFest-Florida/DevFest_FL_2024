@@ -51,7 +51,7 @@ class ConfigPageState extends State<ConfigPage> {
               disabledColor: Colors.grey,
               cardColor: configBloc.darkModeOn ? Colors.black : Colors.white,
               canvasColor:
-                  configBloc.darkModeOn ? Colors.black : Colors.grey[50],
+                  configBloc.darkModeOn ? Colors.black : const Color(0xfff0f0f0),
               brightness:
                   configBloc.darkModeOn ? Brightness.dark : Brightness.light,
               buttonTheme: Theme.of(context).buttonTheme.copyWith(

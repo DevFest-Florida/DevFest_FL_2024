@@ -14,16 +14,23 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class HomeFront extends StatelessWidget {
+class HomeFront extends StatefulWidget {
   const HomeFront({Key? key}) : super(key: key);
 
-  _launchURL(String url) async {
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
-    } else {
-      throw 'Could not launch $url';
-    }
+  @override
+  HomeFrontState createState() => HomeFrontState();
+}
+
+class HomeFrontState extends State<HomeFront> {
+  final GlobalKey<TooltipState> _tooltipKey = GlobalKey<TooltipState>();
+
+  @override
+  void initState() {
+    super.initState();
+    // Show the tooltip when the home page is loaded
+    Future.delayed(const Duration(milliseconds: 5000), () {
+      _tooltipKey.currentState?.ensureTooltipVisible();
+    });
   }
 
   List<Widget> devFestTexts(context) => [
@@ -51,23 +58,13 @@ class HomeFront extends StatelessWidget {
           ),
           children: [
             Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(6.0),
               child: Column(
                 children: [
                   Text(
                     Devfest.descText,
                     style: Theme.of(context).textTheme.bodySmall,
                     textAlign: TextAlign.center,
-                  ),
-                  GestureDetector(
-                    onTap: () async {
-                      await _launchURL(
-                          "https://developers.google.com/community-guidelines");
-                    },
-                    child: Text('Community Guidelines',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: Tools.multiColors[Random().nextInt(4)],
-                            )),
                   ),
                 ],
               ),
@@ -76,57 +73,76 @@ class HomeFront extends StatelessWidget {
         )
       ];
 
-  Widget socialActions(context) => FittedBox(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            IconButton(
-              icon: const Icon(FontAwesomeIcons.facebookF),
-              onPressed: () async {
-                await _launchURL("https://www.facebook.com/devfestflorida/");
-              },
+  Widget socialActions(context) => MouseRegion(
+        onEnter: (_) => _tooltipKey.currentState?.ensureTooltipVisible(),
+        onExit: (_) => _tooltipKey.currentState?.deactivate(),
+        child: Tooltip(
+          key: _tooltipKey,
+          message: "Connect with us on social media and join our community!",
+          waitDuration: const Duration(milliseconds: 500),
+          decoration: BoxDecoration(
+            color: Tools.multiColors[Random().nextInt(4)],
+            borderRadius: BorderRadius.circular(8),
+          ),
+          textAlign: TextAlign.center,
+          textStyle: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+          child: FittedBox(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                IconButton(
+                  icon: const Icon(FontAwesomeIcons.facebookF),
+                  onPressed: () async {
+                    const url = "https://www.facebook.com/devfestflorida/";
+                    await launchUrl(Uri.parse(url));
+                  },
+                ),
+                IconButton(
+                  icon: const Icon(FontAwesomeIcons.twitter),
+                  onPressed: () async {
+                    const url = "https://twitter.com/devfestfl";
+                    await launchUrl(Uri.parse(url));
+                  },
+                ),
+                IconButton(
+                  icon: const Icon(FontAwesomeIcons.linkedinIn),
+                  onPressed: () async {
+                    const url =
+                        "https://www.linkedin.com/company/devfestflorida/";
+                    await launchUrl(Uri.parse(url));
+                  },
+                ),
+                IconButton(
+                  icon: const Icon(FontAwesomeIcons.youtube),
+                  onPressed: () async {
+                    const url =
+                        "https://www.youtube.com/channel/UCKy_rozojea4PZHCVYHqKwg";
+                    await launchUrl(Uri.parse(url));
+                  },
+                ),
+                IconButton(
+                  icon: const Icon(FontAwesomeIcons.google),
+                  onPressed: () async {
+                    const url =
+                        "https://gdg.community.dev/gdg-central-florida/";
+                    await launchUrl(Uri.parse(url));
+                  },
+                ),
+                IconButton(
+                  icon: const Icon(FontAwesomeIcons.discord),
+                  onPressed: () async {
+                    const url = "https://discord.gg/XRY5Qf4QjK";
+                    await launchUrl(Uri.parse(url));
+                  },
+                ),
+              ],
             ),
-            IconButton(
-              icon: const Icon(FontAwesomeIcons.twitter),
-              onPressed: () async {
-                await _launchURL("https://twitter.com/devfestfl");
-              },
-            ),
-            IconButton(
-              icon: const Icon(FontAwesomeIcons.linkedinIn),
-              onPressed: () async {
-                _launchURL("https://www.linkedin.com/company/devfestflorida/");
-              },
-            ),
-            IconButton(
-              icon: const Icon(FontAwesomeIcons.youtube),
-              onPressed: () async {
-                await _launchURL(
-                    "https://www.youtube.com/channel/UCKy_rozojea4PZHCVYHqKwg");
-              },
-            ),
-            IconButton(
-              icon: const Icon(FontAwesomeIcons.meetup),
-              onPressed: () async {
-                await _launchURL("https://www.meetup.com/GDG-Central-Florida/");
-              },
-            ),
-            IconButton(
-              icon: const Icon(FontAwesomeIcons.envelope),
-              onPressed: () async {
-                var emailUrl =
-                    '''mailto:suavejavi@gmail.com?subject=I Need Support - DevFest Florida 🌴🏖 App&body=Thanks for reaching out! I'd be more than happy to help you. Please, provide below a description of the issue and your contact information.
-👇👇👇
- \n
- ''';
-                var out = Uri.encodeFull(emailUrl);
-                await _launchURL(out);
-              },
-            ),
-          ],
+          ),
         ),
       );
-
   Widget newActions(context) => Wrap(
         alignment: WrapAlignment.center,
         spacing: 30.0,
@@ -199,6 +215,26 @@ class HomeFront extends StatelessWidget {
               height: 20,
             ),
             socialActions(context),
+            const SizedBox(
+              height: 20,
+            ),
+            GestureDetector(
+              onTap: () async {
+                const url =
+                    "https://developers.google.com/community-guidelines";
+                if (await canLaunchUrl(Uri.parse(url))) {
+                  await launchUrl(Uri.parse(url));
+                } else {
+                  throw 'Could not launch $url';
+                }
+              },
+              child: Text(
+                'Community Guidelines',
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Tools.multiColors[Random().nextInt(4)],
+                    ),
+              ),
+            ),
             const SizedBox(
               height: 20,
             ),

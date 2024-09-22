@@ -1,4 +1,4 @@
-package com.example.devfestfl
+package us.techno_logic.devfestfl
 
 import io.flutter.embedding.android.FlutterActivity
 

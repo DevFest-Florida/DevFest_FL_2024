@@ -113,7 +113,7 @@ class SessionDetail extends StatelessWidget {
               Text(
                 speaker.fullName,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(        
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
               ),
@@ -134,19 +134,20 @@ class SessionDetail extends StatelessWidget {
               ),
               RichText(
                 text: TextSpan(
-                  text: "Session Description: ",
+                  text: """Session Description:        
+""",
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    fontSize: 13,
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.bold,
-                  ),
+                        fontSize: 13,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.bold,
+                      ),
                   children: <TextSpan>[
                     TextSpan(
                       text: session.description ?? 'Social Activity',
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        fontSize: 13,
-                        fontStyle: FontStyle.normal,
-                      ),
+                            fontSize: 13,
+                            fontStyle: FontStyle.normal,
+                          ),
                     ),
                   ],
                 ),

@@ -37,6 +37,7 @@ dependencies:
     logging: ^1.2.0
     google_maps_flutter_web: ^0.5.10
     webview_flutter: ^4.9.0
+    internet_connection_checker_plus: ^2.5.2
 dev_dependencies:
     flutter_test:
         sdk: flutter

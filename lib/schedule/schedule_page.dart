@@ -99,25 +99,31 @@ class SchedulePageState extends State<SchedulePage> {
         body: FutureBuilder<List<Group>>(
           future: _sessionsFuture,
           builder: (context, sessionsSnapshot) {
+            if (sessionsSnapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (sessionsSnapshot.hasError) {
+              return Center(
+                  child: Text(
+                      'Error: ${sessionsSnapshot.error}. Please connect to the internet to view the latest schedule.'));
+            } else if (!sessionsSnapshot.hasData ||
+                sessionsSnapshot.data!.isEmpty) {
+              return const Center(
+                  child: Text(
+                      'No sessions found. Please connect to the internet to view the latest schedule.'));
+            }
+
             return FutureBuilder<List<Speaker>>(
               future: _speakersFuture,
               builder: (context, speakersSnapshot) {
-                if (sessionsSnapshot.connectionState ==
-                        ConnectionState.waiting ||
-                    speakersSnapshot.connectionState ==
-                        ConnectionState.waiting) {
+                if (speakersSnapshot.connectionState ==
+                    ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
-                } else if (sessionsSnapshot.hasError ||
-                    speakersSnapshot.hasError) {
+                } else if (speakersSnapshot.hasError) {
                   return Center(
-                      child: Text(
-                          'Error: ${sessionsSnapshot.error ?? speakersSnapshot.error}'));
-                } else if (!sessionsSnapshot.hasData ||
-                    sessionsSnapshot.data!.isEmpty ||
-                    !speakersSnapshot.hasData ||
+                      child: Text('Error: ${speakersSnapshot.error}'));
+                } else if (!speakersSnapshot.hasData ||
                     speakersSnapshot.data!.isEmpty) {
-                  return const Center(
-                      child: Text('No sessions or speakers found'));
+                  return const Center(child: Text('No speakers found'));
                 }
 
                 final groups = sessionsSnapshot.data!;

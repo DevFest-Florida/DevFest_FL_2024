@@ -134,7 +134,7 @@ class SessionList extends StatelessWidget {
               ),
             ),
             subtitle: Text(
-              allSessions[index].room,
+              allSessions[index].room.split(' - ')[0],
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     fontSize: 10,
                   ),

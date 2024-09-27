@@ -134,20 +134,19 @@ class SchedulePageState extends State<SchedulePage> {
                 final serviceSessions =
                     sessions.where((s) => s.isServiceSession).toList();
                 final webSessions =
-                    sessions.where((s) => s.room == "Web").toList();
+                    sessions.where((s) => s.room.startsWith("Web")).toList();
                 final mobileSessions =
-                    sessions.where((s) => s.room == "Mobile").toList();
+                    sessions.where((s) => s.room.startsWith("Mobile")).toList();
                 final cloudSessions =
-                    sessions.where((s) => s.room == "Cloud").toList();
+                    sessions.where((s) => s.room.startsWith("Cloud")).toList();
                 final startupsSessions =
-                    sessions.where((s) => s.room == "Startup").toList();
+                    sessions.where((s) => s.room.startsWith("Startup")).toList();
                 final aiSessions =
-                    sessions.where((s) => s.room == "AI").toList();
+                    sessions.where((s) => s.room.startsWith("AI")).toList();
                 final careerSessions =
-                    sessions.where((s) => s.room == "Career").toList();
+                    sessions.where((s) => s.room.startsWith("Career")).toList();
                 final workshopsSessions =
-                    sessions.where((s) => s.room == "Workshops").toList();
-
+                    sessions.where((s) => s.room.startsWith("Workshops")).toList();
                 return TabBarView(
                   children: <Widget>[
                     SessionList(

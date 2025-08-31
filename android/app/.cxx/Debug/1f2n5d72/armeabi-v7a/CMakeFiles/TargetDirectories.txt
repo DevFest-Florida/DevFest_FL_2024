@@ -1,0 +1,2 @@
+/Users/javi/Desktop/CodeVista/GDG/DevFest_FL_2024/android/app/.cxx/Debug/1f2n5d72/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/javi/Desktop/CodeVista/GDG/DevFest_FL_2024/android/app/.cxx/Debug/1f2n5d72/armeabi-v7a/CMakeFiles/rebuild_cache.dir

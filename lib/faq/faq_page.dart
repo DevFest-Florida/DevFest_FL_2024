@@ -22,7 +22,7 @@ class FaqPageState extends State<FaqPage> {
     if (!kIsWeb) {
       controller = WebViewController()
         ..setJavaScriptMode(JavaScriptMode.unrestricted)
-        ..loadRequest(Uri.parse("https://devfestflorida.org/blog"));
+        ..loadRequest(Uri.parse("https://devfestflorida.com/blog"));
     }
   }
 
@@ -33,8 +33,8 @@ class FaqPageState extends State<FaqPage> {
       body: kIsWeb
           ? Center(
               child: ElevatedButton(
-                child: const Text('Open FAQ in browser'),
-                onPressed: () => launchUrl(Uri.parse("https://devfestflorida.org/blog")),
+                child: const Text('Open Blog Page in browser'),
+                onPressed: () => launchUrl(Uri.parse("https://devfestflorida.com/blog")),
               ),
             )
           : Stack(

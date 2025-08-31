@@ -81,6 +81,7 @@ for more information.
 
 #### Current Versions:
 
+* App Version: 2.4.2 (build 4) - Android 15 (API level 35) compatible
 * Flutter Version: 3.24.3
 * Dart SDK Version: 3.5.3
 

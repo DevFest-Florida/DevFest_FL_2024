@@ -44,16 +44,20 @@ class ConfigPageState extends State<ConfigPage> {
             title: 'GDG Devfest Florida',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
-              //* Custom Google Font
               fontFamily: Devfest.googleSansFamily,
               primarySwatch: Colors.red,
               primaryColor: configBloc.darkModeOn ? Colors.black : Colors.white,
               disabledColor: Colors.grey,
-              cardColor: configBloc.darkModeOn ? Colors.black : Colors.white,
+              cardColor: configBloc.darkModeOn ? const Color(0xff1e1e1e) : Colors.white,
+              scaffoldBackgroundColor: configBloc.darkModeOn ? Colors.black : const Color(0xfff0f0f0),
               canvasColor:
                   configBloc.darkModeOn ? Colors.black : const Color(0xfff0f0f0),
               brightness:
                   configBloc.darkModeOn ? Brightness.dark : Brightness.light,
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: Colors.red,
+                brightness: configBloc.darkModeOn ? Brightness.dark : Brightness.light,
+              ),
               buttonTheme: Theme.of(context).buttonTheme.copyWith(
                   colorScheme: configBloc.darkModeOn
                       ? const ColorScheme.dark()

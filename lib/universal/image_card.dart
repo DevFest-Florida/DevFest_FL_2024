@@ -9,9 +9,11 @@ class ImageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(17),
-      height: MediaQuery.of(context).size.height * 0.2,
-      width: MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.of(context).size.height * 0.22,
+        maxWidth: MediaQuery.of(context).size.width,
+      ),
       decoration: BoxDecoration(
         color: ConfigBloc().darkModeOn
           ? Tools.hexToColor("#1f2124")
@@ -22,7 +24,7 @@ class ImageCard extends StatelessWidget {
       ),
       child: Image.asset(
         img,
-        fit: BoxFit.cover,
+        fit: BoxFit.contain,
         filterQuality: FilterQuality.high,
       ),
     );

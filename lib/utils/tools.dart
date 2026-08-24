@@ -11,4 +11,17 @@ class Tools {
     Colors.green,
     Colors.blue,
   ];
+
+  static Color getMultiColor(BuildContext context, int index) {
+    bool isDark = Theme.of(context).brightness == Brightness.dark;
+    if (isDark) {
+      return [
+        Colors.redAccent,
+        Colors.amberAccent,
+        Colors.lightGreenAccent,
+        Colors.lightBlueAccent,
+      ][index % 4];
+    }
+    return multiColors[index % 4];
+  }
 }

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:devfestfl/config/config_bloc.dart';
 import 'package:devfestfl/universal/dev_scaffold.dart';
 import 'package:devfestfl/utils/tools.dart';
@@ -101,32 +99,39 @@ class MapPageState extends State<MapPage> {
               mapToolbarEnabled: false,
               zoomControlsEnabled: false,
             ),
-            IgnorePointer(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    text: "Seminole State College\n",
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
+            Positioned(
+              top: 10,
+              left: 16,
+              right: 16,
+              child: Card(
+                elevation: 4.0,
+                color: Theme.of(context).cardColor.withValues(alpha: 0.9),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+                  child: RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      text: "Seminole State College\n",
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                      children: [
+                        TextSpan(
+                          text: "Wayne M. Densch Partnership Center\n"
+                                "100 Weldon Blvd\n"
+                                "Sanford, FL 32773",
+                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                fontSize: 14,
+                                fontWeight: FontWeight.normal,
+                                color: Tools.getMultiColor(context, 1),
+                              ),
                         ),
-                    children: [
-                      TextSpan(
-                        text: "Wayne M. Densch Partnership Center\n"
-                              "100 Weldon Blvd\n"
-                              "Sanford, FL 32773",
-                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              fontSize: 14,
-                              fontWeight: FontWeight.normal,
-                              color: Tools.multiColors[Random().nextInt(4)],
-                            ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

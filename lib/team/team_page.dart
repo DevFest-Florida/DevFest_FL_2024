@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:devfestfl/home/team.dart';
 import 'package:devfestfl/universal/dev_scaffold.dart';
 import 'package:devfestfl/utils/tools.dart';
@@ -161,13 +159,7 @@ class TeamPageState extends State<TeamPage> {
                         child: FaIcon(
                           FontAwesomeIcons.link,
                           size: 15,
-                          color: Theme.of(context)
-                              .textTheme
-                              .bodySmall
-                              ?.copyWith(
-                                color: Tools.multiColors[Random().nextInt(4)],
-                              )
-                              .color,
+                          color: Tools.getMultiColor(context, chapterIndex),
                         )),
                   ],
                 ),
@@ -187,14 +179,14 @@ class TeamPageState extends State<TeamPage> {
                         children: <Widget>[
                           ConstrainedBox(
                             constraints: BoxConstraints.expand(
-                              height: MediaQuery.of(context).size.height * 0.2,
-                              width: MediaQuery.of(context).size.width * 0.3,
+                              height: MediaQuery.of(context).size.height * 0.16,
+                              width: MediaQuery.of(context).size.width * 0.28,
                             ),
                             child: Hero(
                               tag: team.id,
                               child: CircleAvatar(
                                 radius:
-                                    MediaQuery.of(context).size.width * 0.15,
+                                    MediaQuery.of(context).size.width * 0.13,
                                 backgroundColor: Colors.white,
                                 backgroundImage: AssetImage(
                                   team.image,
@@ -229,8 +221,7 @@ class TeamPageState extends State<TeamPage> {
                                       width: MediaQuery.of(context).size.width *
                                           0.3,
                                       height: 5,
-                                      color: Tools
-                                          .multiColors[Random().nextInt(4)],
+                                      color: Tools.getMultiColor(context, memberIndex),
                                     ),
                                   ],
                                 ),
@@ -276,8 +267,7 @@ class TeamPageState extends State<TeamPage> {
                                         .textTheme
                                         .bodySmall
                                         ?.copyWith(
-                                          color: Tools
-                                              .multiColors[Random().nextInt(4)],
+                                          color: Tools.getMultiColor(context, memberIndex),
                                         ),
                                   ),
                                 ),

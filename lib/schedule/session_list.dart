@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:devfestfl/home/session.dart';
 import 'package:devfestfl/home/speaker.dart';
@@ -126,7 +124,7 @@ class SessionList extends StatelessWidget {
                               ?.copyWith(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
-                                color: Tools.multiColors[Random().nextInt(4)],
+                                color: Tools.getMultiColor(context, index),
                               ),
                         ),
                       ]

@@ -29,7 +29,7 @@ class SessionDetail extends StatelessWidget {
     if (filteredLinks.isEmpty) {
       // Fallback: If no social links, display button to website
       return IconButton(
-        icon: const Icon(FontAwesomeIcons.globe, size: 15),
+        icon: const FaIcon(FontAwesomeIcons.globe, size: 15),
         onPressed: () {
           launchUrl(Uri.parse('https://devfestflorida.com'));
         },
@@ -43,7 +43,7 @@ class SessionDetail extends StatelessWidget {
         children: <Widget>[
           for (var link in filteredLinks)
             IconButton(
-              icon: Icon(_getIconForLinkType(link.linkType), size: 15),
+              icon: FaIcon(_getIconForLinkType(link.linkType), size: 15),
               onPressed: () {
                 launchUrl(Uri.parse(link.url));
               },
@@ -53,7 +53,7 @@ class SessionDetail extends StatelessWidget {
     );
   }
 
-  IconData _getIconForLinkType(String linkType) {
+  FaIconData _getIconForLinkType(String linkType) {
     switch (linkType) {
       case 'Twitter':
         return FontAwesomeIcons.twitter;

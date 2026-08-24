@@ -17,7 +17,7 @@ class SponsorPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             IconButton(
-              icon: const Icon(
+              icon: const FaIcon(
                 FontAwesomeIcons.link,
                 size: 15,
               ),

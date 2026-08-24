@@ -37,7 +37,7 @@ class SpeakersPageState extends State<SpeakersPage> {
             for (var link in speaker.links)
               if (link.url.isNotEmpty)
                 IconButton(
-                  icon: Icon(
+                  icon: FaIcon(
                     _getIconForLinkType(link.linkType),
                     size: 15,
                   ),
@@ -49,7 +49,7 @@ class SpeakersPageState extends State<SpeakersPage> {
         ),
       );
 
-  IconData _getIconForLinkType(String linkType) {
+  FaIconData _getIconForLinkType(String linkType) {
     switch (linkType) {
       case 'Twitter':
         return FontAwesomeIcons.twitter;

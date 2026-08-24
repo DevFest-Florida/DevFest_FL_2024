@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Devfest {
   static const String appName = "DevFest FL";
   static const String appVersion = "Version 2.4.2";
-  static const int appVersionCode = 1;
+  static const int appVersionCode = 4;
   static const String appColor = "#ffd7167";
   static Color primaryAppColor = Colors.white;
   static Color secondaryAppColor = Colors.black;

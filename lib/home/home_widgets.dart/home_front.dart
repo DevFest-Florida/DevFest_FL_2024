@@ -94,21 +94,21 @@ class HomeFrontState extends State<HomeFront> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 IconButton(
-                  icon: const Icon(FontAwesomeIcons.facebookF),
+                  icon: const FaIcon(FontAwesomeIcons.facebookF),
                   onPressed: () async {
                     const url = "https://www.facebook.com/devfestflorida/";
                     await launchUrl(Uri.parse(url));
                   },
                 ),
                 IconButton(
-                  icon: const Icon(FontAwesomeIcons.twitter),
+                  icon: const FaIcon(FontAwesomeIcons.twitter),
                   onPressed: () async {
                     const url = "https://twitter.com/devfestfl";
                     await launchUrl(Uri.parse(url));
                   },
                 ),
                 IconButton(
-                  icon: const Icon(FontAwesomeIcons.linkedinIn),
+                  icon: const FaIcon(FontAwesomeIcons.linkedinIn),
                   onPressed: () async {
                     const url =
                         "https://www.linkedin.com/company/devfestflorida/";
@@ -116,7 +116,7 @@ class HomeFrontState extends State<HomeFront> {
                   },
                 ),
                 IconButton(
-                  icon: const Icon(FontAwesomeIcons.youtube),
+                  icon: const FaIcon(FontAwesomeIcons.youtube),
                   onPressed: () async {
                     const url =
                         "https://www.youtube.com/channel/UCKy_rozojea4PZHCVYHqKwg";
@@ -124,7 +124,7 @@ class HomeFrontState extends State<HomeFront> {
                   },
                 ),
                 IconButton(
-                  icon: const Icon(FontAwesomeIcons.google),
+                  icon: const FaIcon(FontAwesomeIcons.google),
                   onPressed: () async {
                     const url =
                         "https://gdg.community.dev/gdg-central-florida/";
@@ -132,7 +132,7 @@ class HomeFrontState extends State<HomeFront> {
                   },
                 ),
                 IconButton(
-                  icon: const Icon(FontAwesomeIcons.discord),
+                  icon: const FaIcon(FontAwesomeIcons.discord),
                   onPressed: () async {
                     const url = "https://discord.gg/XRY5Qf4QjK";
                     await launchUrl(Uri.parse(url));

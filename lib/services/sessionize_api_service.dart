@@ -127,8 +127,12 @@ class SessionizeApiService {
     }
   }
 
-  // Helper function to check for internet connectivity
   Future<bool> _isOnline() async {
-    return await InternetConnection().hasInternetAccess;
+    try {
+      return await InternetConnection().hasInternetAccess;
+    } catch (e) {
+      _logger.warning('InternetConnection check failed: $e');
+      return true;
+    }
   }
 }

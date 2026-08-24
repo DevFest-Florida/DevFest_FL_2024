@@ -42,53 +42,53 @@ class SchedulePageState extends State<SchedulePage> {
           labelStyle: const TextStyle(fontSize: 12),
           tabs: const <Widget>[
             Tab(
-              icon: Icon(FontAwesomeIcons.users, size: 20),
+              icon: FaIcon(FontAwesomeIcons.users, size: 20),
               child: Text("Activity"),
             ),
             Tab(
-              icon: Icon(
+              icon: FaIcon(
                 FontAwesomeIcons.globe,
                 size: 20,
               ),
               child: Text("Web"),
             ),
             Tab(
-              icon: Icon(
+              icon: FaIcon(
                 FontAwesomeIcons.mobile,
                 size: 20,
               ),
               child: Text("Mobile"),
             ),
             Tab(
-              icon: Icon(
+              icon: FaIcon(
                 FontAwesomeIcons.cloud,
                 size: 20,
               ),
               child: Text("Cloud"),
             ),
             Tab(
-              icon: Icon(
+              icon: FaIcon(
                 FontAwesomeIcons.rocket,
                 size: 20,
               ),
               child: Text("Startups"),
             ),
             Tab(
-              icon: Icon(
+              icon: FaIcon(
                 FontAwesomeIcons.handSparkles,
                 size: 20,
               ),
               child: Text("AI"),
             ),
             Tab(
-              icon: Icon(
+              icon: FaIcon(
                 FontAwesomeIcons.briefcase,
                 size: 20,
               ),
               child: Text("Career"),
             ),
             Tab(
-              icon: Icon(
+              icon: FaIcon(
                 FontAwesomeIcons.wrench,
                 size: 20,
               ),

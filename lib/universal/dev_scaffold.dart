@@ -29,7 +29,7 @@ class DevScaffold extends StatelessWidget {
               BlocBuilder<ConfigBloc, ConfigState>(
                 builder: (context, state) {
                   return IconButton(
-                    icon: Icon(
+                    icon: FaIcon(
                       ConfigBloc().darkModeOn
                           ? FontAwesomeIcons.solidSun
                           : FontAwesomeIcons.solidMoon,

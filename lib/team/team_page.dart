@@ -28,7 +28,7 @@ class TeamPageState extends State<TeamPage> {
           children: <Widget>[
             if (team.twitterUrl.isNotEmpty)
               IconButton(
-                icon: const Icon(
+                icon: const FaIcon(
                   FontAwesomeIcons.twitter,
                   size: 15,
                 ),
@@ -38,7 +38,7 @@ class TeamPageState extends State<TeamPage> {
               ),
             if (team.linkedinUrl.isNotEmpty)
               IconButton(
-                icon: Icon(
+                icon: FaIcon(
                   _getIconForLinkType('LinkedIn'),
                   size: 15,
                 ),
@@ -48,7 +48,7 @@ class TeamPageState extends State<TeamPage> {
               ),
             if (team.facebookUrl.isNotEmpty)
               IconButton(
-                icon: Icon(
+                icon: FaIcon(
                   _getIconForLinkType('Facebook'),
                   size: 15,
                 ),
@@ -58,7 +58,7 @@ class TeamPageState extends State<TeamPage> {
               ),
             if (team.discordUrl.isNotEmpty)
               IconButton(
-                icon: Icon(
+                icon: FaIcon(
                   _getIconForLinkType('Discord'),
                   size: 15,
                 ),
@@ -68,7 +68,7 @@ class TeamPageState extends State<TeamPage> {
               ),
             if (team.githubUrl.isNotEmpty)
               IconButton(
-                icon: Icon(
+                icon: FaIcon(
                   _getIconForLinkType('GitHub'),
                   size: 15,
                 ),
@@ -78,7 +78,7 @@ class TeamPageState extends State<TeamPage> {
               ),
             if (team.personalUrl.isNotEmpty)
               IconButton(
-                icon: Icon(
+                icon: FaIcon(
                   _getIconForLinkType('Personal_Website'),
                   size: 15,
                 ),
@@ -88,7 +88,7 @@ class TeamPageState extends State<TeamPage> {
               ),
             if (team.blogUrl.isNotEmpty)
               IconButton(
-                icon: Icon(
+                icon: FaIcon(
                   _getIconForLinkType('Blog'),
                   size: 15,
                 ),
@@ -98,7 +98,7 @@ class TeamPageState extends State<TeamPage> {
               ),
             if (team.companyUrl.isNotEmpty)
               IconButton(
-                icon: Icon(
+                icon: FaIcon(
                   _getIconForLinkType('Company_Website'),
                   size: 15,
                 ),
@@ -110,7 +110,7 @@ class TeamPageState extends State<TeamPage> {
         ),
       );
 
-  IconData _getIconForLinkType(String linkType) {
+  FaIconData _getIconForLinkType(String linkType) {
     switch (linkType) {
       case 'Twitter':
         return FontAwesomeIcons.twitter;
@@ -158,7 +158,7 @@ class TeamPageState extends State<TeamPage> {
                           launchUrl(
                               Uri.parse(gdgChapters[chapterIndex].chapterUrl));
                         },
-                        child: Icon(
+                        child: FaIcon(
                           FontAwesomeIcons.link,
                           size: 15,
                           color: Theme.of(context)

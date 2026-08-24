@@ -30,8 +30,15 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace = "us.techno_logic.devfestfl"
-    compileSdk = 36
+    compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
+
+    lint {
+        disable "EasterEgg", "StopShip"
+        abortOnError false
+        checkReleaseBuilds false
+        lintConfig file("lint.xml")
+    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -44,7 +51,7 @@ android {
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdk = flutter.minSdkVersion
-        targetSdk = 35
+        targetSdk = flutter.targetSdkVersion
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
     }

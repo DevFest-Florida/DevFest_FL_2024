@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:devfestfl/home/speaker.dart';
 import 'package:http/http.dart' as http;
-import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:logging/logging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:devfestfl/home/group.dart';
@@ -74,17 +73,17 @@ class SessionizeApiService {
   }
 
   Future<List<dynamic>> getAllData() async {
-    if (await _isOnline()) {
+    try {
       return await fetchAllData();
-    } else {
+    } catch (e) {
+      _logger.warning('fetchAllData failed: $e. Attempting cached data fallback.');
       final cachedData = await _getCachedData(_allDataEndpoint);
       if (cachedData != null) {
         return (cachedData as List)
             .map((json) => Group.fromJson(json))
             .toList();
       } else {
-        // Handle the case where there is no cached data
-        _logger.severe('No cached data found for getAllData'); // Log the error
+        _logger.severe('No cached data found for getAllData');
         throw Exception(
             'No internet connection and no cached data available for getAllData.');
       }
@@ -92,17 +91,17 @@ class SessionizeApiService {
   }
 
   Future<List<Speaker>> getSpeakers() async {
-    if (await _isOnline()) {
+    try {
       return await fetchSpeakers();
-    } else {
+    } catch (e) {
+      _logger.warning('fetchSpeakers failed: $e. Attempting cached data fallback.');
       final cachedData = await _getCachedData(_speakersEndpoint);
       if (cachedData != null) {
         return (cachedData as List)
             .map((json) => Speaker.fromJson(json))
             .toList();
       } else {
-        // Handle the case where there is no cached data
-        _logger.severe('No cached data found for getSpeakers'); // Log the error
+        _logger.severe('No cached data found for getSpeakers');
         throw Exception(
             'No internet connection and no cached data available for getSpeakers.');
       }
@@ -110,29 +109,20 @@ class SessionizeApiService {
   }
 
   Future<List<Group>> getSessions() async {
-    if (await _isOnline()) {
+    try {
       return await fetchSessions();
-    } else {
+    } catch (e) {
+      _logger.warning('fetchSessions failed: $e. Attempting cached data fallback.');
       final cachedData = await _getCachedData(_sessionsEndpoint);
       if (cachedData != null) {
         return (cachedData as List)
             .map((json) => Group.fromJson(json))
             .toList();
       } else {
-        // Handle the case where there is no cached data
-        _logger.severe('No cached data found for getSessions'); // Log the error
+        _logger.severe('No cached data found for getSessions');
         throw Exception(
             'No internet connection and no cached data available for getSessions.');
       }
-    }
-  }
-
-  Future<bool> _isOnline() async {
-    try {
-      return await InternetConnection().hasInternetAccess;
-    } catch (e) {
-      _logger.warning('InternetConnection check failed: $e');
-      return true;
     }
   }
 }
